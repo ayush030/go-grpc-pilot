@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package pilot;
+
+// path to all proto files
+option go_package = "poc/gRPC/pilot";
+
+
+message Dummy {
+  uint32  id = 1;
+}
+
+service DummyService {
+
+}

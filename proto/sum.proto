@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package pilot;
+
+option go_package = "poc/gRPC/pilot";
+
+// 1 and 2 are field numbers not assignments
+message SumRequest {
+  int32 first = 1;
+  int32 second = 2;
+}
+
+message SumResponse {
+  int32 sum = 1;
+}
+
+service SumService {
+  rpc Sum(SumRequest) returns (SumResponse);
+}
