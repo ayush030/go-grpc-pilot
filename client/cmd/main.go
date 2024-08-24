@@ -1,10 +1,9 @@
 package main
 
 import (
-	"context"
-	"fmt"
-	"grpc-pilot/generated"
+	"grpc-pilot/client"
 	"log"
+	"os"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
@@ -25,16 +24,42 @@ func main() {
 		}
 	}()
 
-	var sumConnection = generated.NewSumServiceClient(grpcConnection)
-
-	response, err := sumConnection.Sum(context.Background(), &generated.SumRequest{
-		First:  2,
-		Second: 3,
-	})
-
-	if err != nil {
-		log.Fatal("unable to connect to server. Error: " + err.Error())
+	var argsWithoutProgram = os.Args[1:]
+	if len(argsWithoutProgram) == 0 {
+		log.Println("Lets do something random")
+		argsWithoutProgram = append(argsWithoutProgram, "random")
 	}
 
-	fmt.Println("response ", response.Sum)
+	switch argsWithoutProgram[0] {
+	case "sum":
+		if len(argsWithoutProgram) < 3 {
+			log.Fatal("invalid inputs, provide atleast 2 integers")
+		}
+
+		client.Sum(grpcConnection, argsWithoutProgram[1:]...)
+
+	case "primes":
+		if len(argsWithoutProgram) != 2 {
+			log.Fatal("invalid inputs, provide only 1 integer")
+		}
+
+		client.Primes(grpcConnection, argsWithoutProgram[1])
+
+	case "average":
+		if len(argsWithoutProgram) < 2 {
+			log.Fatal("invalid inputs, provide atleast 1 number")
+		}
+
+		client.Average(grpcConnection, argsWithoutProgram[1:]...)
+
+	case "max":
+		if len(argsWithoutProgram) < 2 {
+			log.Fatal("invalid inputs, provide atleast 1 number")
+		}
+
+		client.Max(grpcConnection, argsWithoutProgram[1:]...)
+
+	case "random":
+
+	}
 }

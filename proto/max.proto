@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package pilot;
+
+option go_package = "./generated";
+
+message MaxRequest {
+    int32 Number = 1;
+}
+
+message MaxResponse {
+    int32 MaxNumber = 1;
+}
+
+//  client and server both are streaming
+service MaxStreamingService {
+    rpc Max(stream MaxRequest) returns(stream MaxResponse);
+}
