@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package pilot;
 
-option go_package = "poc/gRPC/pilot";
+option go_package = "./generated";
 
 // 1 and 2 are field numbers not assignments
 message SumRequest {

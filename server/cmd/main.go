@@ -1,9 +1,12 @@
 package main
 
 import (
-	"google.golang.org/grpc"
+	"grpc-pilot/generated"
+	"grpc-pilot/server"
 	"log"
 	"net"
+
+	"google.golang.org/grpc"
 )
 
 var serverAddr = "0.0.0.0:5000"
@@ -14,9 +17,14 @@ func main() {
 		log.Fatal("server failed to listen on address " + serverAddr + ". Error: " + err.Error())
 	}
 
-	server := grpc.NewServer()
+	log.Print("listening on " + serverAddr)
 
-	if err := server.Serve(listener); err != nil {
+	grpcServer := grpc.NewServer()
+
+	var serverInstance = server.Server{}
+	generated.RegisterSumServiceServer(grpcServer, &serverInstance)
+
+	if err := grpcServer.Serve(listener); err != nil {
 		log.Fatal("server failed to serve request with error " + err.Error())
 	}
 }

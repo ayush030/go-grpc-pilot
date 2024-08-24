@@ -1,4 +1,4 @@
-module poc/gRPC/pilot
+module grpc-pilot
 
 go 1.22.4
 

@@ -1,15 +1,22 @@
 BUILD_FLAGS ?= CGO_ENABLED=0
+PROTO_FILES ?= proto
 
 clean:
 	rm -rf build/*
+	rm -rf proto/generated/*
+
+vendor:
+	go mod tidy -x
+	go mod vendor
 
 client:
-	go build $(BUILD_FLAGS) -o build/client ./client/cmd
+	$(BUILD_FLAGS) go build -o build/client ./client/cmd
 
 server:
-	go build $(BUILD_FLAGS) -o build/server ./server/cmd
+	$(BUILD_FLAGS) go build -o build/server ./server/cmd
 
 proto:
-	protoc --go_out=proto/generated --go_opt=paths=source_relative --go-grpc_out=proto/generated --go-grpc_opt=paths=source_relative proto/*.proto
+	protoc -I=$(PROTO_FILES) --go_out=generated --go_opt=paths=source_relative --go-grpc_out=generated --go-grpc_opt=paths=source_relative proto/*.proto
 
-.PHONY: clean proto client server
+
+.PHONY: clean vendor proto client server
