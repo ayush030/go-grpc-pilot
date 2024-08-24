@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package pilot;
+
+option go_package = "./generated";
+
+message PrimeRequest {
+    int32 Number = 1;
+}
+
+message PrimeResponse {
+    int32 Prime = 1;
+}
+
+// server streaming the response
+
+service PrimeNumberDecompositionService {
+    rpc PrimeNumberDecomposition(PrimeRequest) returns (stream PrimeResponse);
+}

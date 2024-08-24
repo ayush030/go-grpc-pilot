@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package pilot;
+
+option go_package = "./generated";
+
+
+message averageRequest {
+    float number = 1;
+}
+
+message averageResponse {
+    float average  = 1;
+}
+
+// client streaming requests
+service AverageService {
+    rpc Average(stream averageRequest) returns(averageResponse);
+}

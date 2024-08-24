@@ -11,6 +11,13 @@ import (
 
 var serverAddr = "0.0.0.0:5000"
 
+func registerServices(grpcServer *grpc.Server, serverInstance *server.Server) {
+	generated.RegisterSumServiceServer(grpcServer, serverInstance)
+	generated.RegisterPrimeNumberDecompositionServiceServer(grpcServer, serverInstance)
+	generated.RegisterAverageServiceServer(grpcServer, serverInstance)
+	generated.RegisterMaxStreamingServiceServer(grpcServer, serverInstance)
+}
+
 func main() {
 	listener, err := net.Listen("tcp", serverAddr)
 	if err != nil {
@@ -22,7 +29,7 @@ func main() {
 	grpcServer := grpc.NewServer()
 
 	var serverInstance = server.Server{}
-	generated.RegisterSumServiceServer(grpcServer, &serverInstance)
+	registerServices(grpcServer, &serverInstance)
 
 	if err := grpcServer.Serve(listener); err != nil {
 		log.Fatal("server failed to serve request with error " + err.Error())
