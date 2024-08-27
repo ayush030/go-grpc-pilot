@@ -11,9 +11,3 @@ message PrimeRequest {
 message PrimeResponse {
     int32 Prime = 1;
 }
-
-// server streaming the response
-
-service PrimeNumberDecompositionService {
-    rpc PrimeNumberDecomposition(PrimeRequest) returns (stream PrimeResponse);
-}

@@ -12,8 +12,3 @@ message averageRequest {
 message averageResponse {
     float average  = 1;
 }
-
-// client streaming requests
-service AverageService {
-    rpc Average(stream averageRequest) returns(averageResponse);
-}

@@ -1,5 +1,6 @@
 1.  install "protoc" compiler and protobuf, grpc packages for golang
-sudo snap install protobuf --classic
+sudo snap install protobuf --classic OR
+go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
 
 go get -u google.golang.org/protobuf/cmd/protoc-gen-go
 go get -u google.golang.org/grpc/cmd/protoc-gen-go-grpc

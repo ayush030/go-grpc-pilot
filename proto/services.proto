@@ -1,0 +1,23 @@
+syntax="proto3";
+package pilot;
+
+option go_package = "./generated";
+
+import "sum.proto";
+import "average.proto";
+import "max.proto";
+import "prime.proto";
+
+
+service CalculatorService {
+    rpc Sum(SumRequest) returns (SumResponse);
+
+    // client streaming requests
+    rpc Average(stream averageRequest) returns(averageResponse);
+
+    // server streaming the response
+    rpc PrimeNumberDecomposition(PrimeRequest) returns (stream PrimeResponse);
+
+    //  client and server both are streaming
+    rpc Max(stream MaxRequest) returns(stream MaxResponse);
+}
