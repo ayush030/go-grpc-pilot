@@ -11,8 +11,3 @@ message MaxRequest {
 message MaxResponse {
     int32 MaxNumber = 1;
 }
-
-//  client and server both are streaming
-service MaxStreamingService {
-    rpc Max(stream MaxRequest) returns(stream MaxResponse);
-}
