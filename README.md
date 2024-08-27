@@ -1,3 +1,11 @@
+This repository is a good starting point if one wants to learn about gRPC and how to develop APIs using it.
+Pre-requisites for this is some knowledge in Golang, Protobuf and APIs.
+
+![1_P0z3ortvUH4gZtIyj4al_A](https://github.com/user-attachments/assets/10c53999-dddd-4014-9fc5-8833faf6d911)
+
+
+Steps to run the project:
+
 1.  install "protoc" compiler and protobuf, grpc packages for golang
 sudo snap install protobuf --classic OR
 go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
